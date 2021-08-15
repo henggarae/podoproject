@@ -147,6 +147,8 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_FORM_CLASS = 'podomarket.forms.SignupForm'
+
 #email setting
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
