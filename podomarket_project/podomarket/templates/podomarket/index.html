@@ -5,7 +5,7 @@
 {{user.address}}
 
 </p>
-<navbar>
+<navbar>    
 {% if user.is_authenticated %}
     <a href="{% url 'account_logout' %}">로그아웃</a>
 
@@ -17,6 +17,8 @@
 
 {% if user.is_authenticated %}
     <p>지금 로그인중</p>
+    <p><a href="{% url 'account_change_password' %}">비번변경</a></p>
+
 {% else %}
     <p>로그아웃중임</p>
 {% endif %}
