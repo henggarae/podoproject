@@ -1,0 +1,40 @@
+{% extends "podomarket_base/base_with_navbar.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}{% if post %}게시글 수정 | 일일결산{% else %}새 게시글 작성 | 일일결산{% endif %}{% endblock title %}
+
+{% block content %}
+<form class="post-form" method="post" autocomplete="off" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="title">
+    {{ form.platoon_member|add_class:"podo-input"|add_error_class:"error"|attr:"placeholder:소대원" }}
+    {% for error in form.title.errors %}
+      <div class="error-message">{{ error }}</div>
+    {% endfor %}  
+  </div>
+  <div class="price">
+    {{ form.platoon_member_rank|add_class:"podo-input"|add_error_class:"error"|attr:"placeholder:계급" }}
+    {% for error in form.platoon_member_rank.errors %}
+      <div class="error-message">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="detail">
+    {{ form.content|add_class:"podo-input"|add_error_class:"error"|attr:"placeholder:상세 정보" }}
+    {% for error in form.content.errors %}
+      <div class="error-message">{{ error }}</div>
+    {% endfor %}  
+    </div>
+  
+  <div class="buttons">
+    <a class="podo-button large secondary cancel" href="{% if post %}{% url 'post-detail' post.id %}{% else %}{% url 'index' %}{% endif %}">취소</a>
+    <button class="podo-button large primary submit" type="submit">완료</button>
+  </div>
+</form>
+{% endblock content %}
+
+
+            'platoon_member',
+            'platoon_member_rank',
+            'content',

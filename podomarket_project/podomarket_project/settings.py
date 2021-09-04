@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'podomarket',
     'django.contrib.sites',
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     
+    'podomarket',
+    
+    'widget_tweaks',
 ]
 SITE_ID = 1
 
@@ -118,6 +121,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/uploads/'
+
 #auth settings
 
 AUTH_USER_MODEL = "podomarket.User"
@@ -134,15 +141,15 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_SIGNUP_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
 ACCOUNT_LOGOUT_ON_GET   = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_FORM_CLASS = 'podomarket.forms.SignupForm'
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'account_email_confirmation_done' 
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'account_email_confirmation_done'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+SESSION_COOKIE_AGE = 3600
+
 
 #email setting
 

@@ -1,12 +1,25 @@
 from django import forms
-from .models import User
+from .models import User,Post
 
 class SignupForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['nickname','kakao_id',"address"]
+        fields = ['name','rank']
     def signup(self,request,user):
-        user.nickname = self.cleaned_data['nickname']
-        user.kakao_id=self.cleaned_data['kakao_id']
-        user.address=self.cleaned_data['address']
+        user.name = self.cleaned_data['name']
+        user.rank = self.cleaned_data['rank']
+
         user.save()
+        
+        
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = [
+            'platoon_member',
+            'platoon_member_rank',
+            'content',
+        ]
+        #widgets = {
+        #    'item_condition': forms.RadioSelect,
+        #}

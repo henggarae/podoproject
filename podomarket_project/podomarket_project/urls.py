@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from podomarket.views import CustomPasswordChangeView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +28,8 @@ urlpatterns = [
     path("email-confirmation-done/",TemplateView.as_view(template_name='podomarket/email_confirmation_done.html'),name="account_email_confirmation_done"),
     path("password/change/",CustomPasswordChangeView.as_view(),name="account_password_change"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

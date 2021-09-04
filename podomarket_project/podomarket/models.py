@@ -1,27 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .validators import contains_special_character,no_special_character
+from .validators import include_rank
 
 class User(AbstractUser):
-    nickname = models.CharField(
-        max_length=15,
-        unique=True,
-        null=True,
-        validators=[no_special_character],
-        error_messages={'unique':"이미 사용중인 닉네임"},
-    )
-    kakao_id = models.CharField(
-        max_length=20,
-        validators=[no_special_character],
+    name = models.CharField(
+        max_length=6,
+        unique=False,
         null=True,
     )
-    address = models.CharField(
-        max_length=40,
+    rank = models.CharField(
+        max_length=2,
+        unique=False,
         null=True,
-        validators=[no_special_character],
+        validators=[include_rank],
+    )
 
-    )
     def __str__(self):
-        return self.email
-
-
+        return self.username
+    
+class Post(models.Model):
+    dt_created = models.DateTimeField(auto_now_add=True)
+    dt_updated = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    platoon_member = models.CharField(max_length=10)
+    platoon_member_rank = models.CharField(max_length=2,unique=False,null=True,validators=[include_rank])
+    content = models.TextField(null=True)
+    
+    
+    
+    
+    def __str__(self):
+        return self.platoon_member
+    
